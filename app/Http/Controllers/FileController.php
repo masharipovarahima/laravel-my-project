@@ -91,7 +91,7 @@ class FileController extends Controller
     public function destroy($id)
     {
         $file = File::findOrFail($id); // Faylni topish
-        $subject_name = $file->subject_name;
+        $subject_name = $file->subject?->name;
         if ($file->file_url && Storage::disk('public')->exists($file->file_url)) {
             Storage::disk('public')->delete($file->file_url);
         }

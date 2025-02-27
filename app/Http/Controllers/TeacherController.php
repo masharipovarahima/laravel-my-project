@@ -13,7 +13,6 @@ class TeacherController extends Controller
     public function index(Request $request)
     {
         $query = Teacher::query();
-
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where(function ($q) use ($search) {
@@ -59,8 +58,8 @@ class TeacherController extends Controller
 
             // ✅ Rasmni yuklash va saqlash
             if ($request->hasFile('image_url')) {
-                $imagePath = $request->file('image_url')->store('teachers', 'public');
-                $teacher->image_url = $imagePath;
+                $imagePath = $request->file('image_url')->store('teacher_images', 'public'); // ✅ To‘g‘ri saqlash
+                $teacher->image = 'storage/' . $imagePath; // ✅ Rasmni public URL sifatida saqlash
             }
 
             $teacher->save();
@@ -71,6 +70,7 @@ class TeacherController extends Controller
             return back()->withErrors('Xatolik yuz berdi. Iltimos, qayta urinib ko‘ring.')->withInput();
         }
     }
+
 
     // 📌 O‘qituvchini ko‘rsatish
     public function show(Teacher $teacher)

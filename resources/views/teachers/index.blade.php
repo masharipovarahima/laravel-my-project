@@ -12,8 +12,10 @@
     <div class="card-header d-flex justify-content-between align-items-center">
         <h4 class="mb-0">O'qituvchilar ro'yxati</h4>
         <div class="d-flex">
-            <input type="text" id="searchInput" class="form-control me-2" placeholder="Qidirish...">
-            <button class="btn btn-primary" onclick="searchTable()">Qidirish</button>
+            <form action="{{ route('teachers.index') }}" method="GET">
+                <input type="text" name="search" id="searchInput" value="{{ request('search') }}" class="form-control me-2" placeholder="Qidirish...">
+                <button type="submit" class="btn btn-primary" onclick="searchTable()">Qidirish</button>
+            </form>
         </div>
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createTeacherModal">
             O'qituvchi qo'shish
@@ -44,6 +46,7 @@
                 </thead>
                 <tbody id="teacherTable">
                     @forelse($teachers as $teacher)
+                    {{-- @dd($teacher); --}}
                         <tr>
                             <td>{{ $teacher->id }}</td>
                             <td>{{ $teacher->name }}</td>
@@ -52,12 +55,12 @@
                             <td>{{ $teacher->specialist }}</td>
                             <td>{{ $teacher->diplom_number }}</td>
                             <td>
-                            @if($teacher->image_url)
+                            @if($teacher->image)
     {{-- Rasm manzilini tekshirish --}}
-    <p>Rasm manzili: {{ asset('storage/' . $teacher->image_url) }}</p>
+    <p>Rasm manzili: {{ asset($teacher->image) }}</p>
     
     {{-- Rasmni chiqarish --}}
-    <img src="{{ asset('storage/' . $teacher->image_url) }}" alt="Rasm" class="img-thumbnail" width="100">
+    <img src="{{ asset($teacher->image) }}" alt="Rasm" class="img-thumbnail" width="100">
 @else
     <span class="text-muted">Rasm yo'q</span>
 @endif
@@ -88,7 +91,7 @@
                                         data-instagram="{{ $teacher->instagram }}"
                                         data-about="{{ $teacher->about }}"
                                         data-building_room="{{ $teacher->building_room }}"
-                                        data-image="{{ asset('storage/' . $teacher->image_url) }}">
+                                        data-image="{{ asset('storage/' . $teacher->image) }}">
                                     Tahrirlash
                                 </button>
 
@@ -180,7 +183,7 @@ function searchTable() {
                             <input type="text" class="form-control" id="building_room" name="building_room">
 
                             <label for="image" class="form-label mt-2">Rasm</label>
-                            <input type="file" class="form-control" id="image" name="image">
+                            <input type="file" class="form-control" id="image" name="image_url">
                         </div>
                     </div>
                 </div>

@@ -38,7 +38,7 @@
                 <!-- Rasm yuklash -->
                 <div class="mb-3">
                     <label for="image" class="form-label">Rasm yuklash</label>
-                    <input type="file" class="form-control" id="image" name="image">
+                    <input type="file" class="form-control" id="image" name="image_url">
                 </div>
                 <!-- Manzil -->
                 <div class="mb-3">

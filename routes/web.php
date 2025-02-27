@@ -66,7 +66,7 @@ Route::delete('/files/{id}', [FileController::class, 'destroy'])->name('files.de
 Route::get('/files/download/{subject_name}', [FileController::class, 'download'])->name('files.download');
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 use Illuminate\Support\Facades\Log;
 

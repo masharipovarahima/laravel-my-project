@@ -33,16 +33,17 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
+        // dd(vars: $request->all());
         $validated = $request->validate([
             'file' => 'required|file|mimes:jpg,jpeg,png,pdf,doc,docx|max:5120',
-            'subject_name' => 'required|exists:subjects,name',
+            'subject_id' => 'required|exists:subjects,id',
         ]);
 
         $filePath = $request->file('file')->store('files', 'public');
 
         File::create([
             'file_url' => $filePath,
-            'subject_name' => $request->subject_name,
+            'subject_id' => $request->subject_id,
         ]);
 
         return redirect()->route('files.index')->with('success', 'Fayl muvaffaqiyatli yuklandi!');
@@ -87,10 +88,10 @@ class FileController extends Controller
     /**
      * Faylni o'chirish.
      */
-    public function destroy($subject_name)
+    public function destroy($id)
     {
-        $file = File::where('subject_name', $subject_name)->firstOrFail();
-
+        $file = File::findOrFail($id); // Faylni topish
+        $subject_name = $file->subject_name;
         if ($file->file_url && Storage::disk('public')->exists($file->file_url)) {
             Storage::disk('public')->delete($file->file_url);
         }
@@ -103,9 +104,9 @@ class FileController extends Controller
     /**
      * Faylni yuklab olish.
      */
-    public function download($subject_name)
+    public function download($id)
     {
-        $file = File::where('subject_name', $subject_name)->firstOrFail();
+        $file = File::findOrFail($id); // Faylni topish
 
         if (!Storage::disk('public')->exists($file->file_url)) {
             return redirect()->route('files.index')->with('error', 'Fayl topilmadi!');

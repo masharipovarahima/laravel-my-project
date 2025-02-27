@@ -8,7 +8,12 @@ class File extends Model
 {
     //
     protected $fillable = [
-        'file_url',        
-        'subject_name',      
+        'file_url',
+        'subject_id',
     ];
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
 }

@@ -11,12 +11,12 @@
     <div class="card shadow-sm mb-4">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h4 class="mb-0">O'qituvchilar ro'yxati</h4>
+        <form action="{{ route('teachers.index') }}" method="GET">
         <div class="d-flex">
-            <form action="{{ route('teachers.index') }}" method="GET">
                 <input type="text" name="search" id="searchInput" value="{{ request('search') }}" class="form-control me-2" placeholder="Qidirish...">
                 <button type="submit" class="btn btn-primary" onclick="searchTable()">Qidirish</button>
-            </form>
-        </div>
+            </div>
+        </form>
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createTeacherModal">
             O'qituvchi qo'shish
         </button>
@@ -91,7 +91,7 @@
                                         data-instagram="{{ $teacher->instagram }}"
                                         data-about="{{ $teacher->about }}"
                                         data-building_room="{{ $teacher->building_room }}"
-                                        data-image="{{ asset('storage/' . $teacher->image) }}">
+                                        data-image="{{ asset($teacher->image) }}">
                                     Tahrirlash
                                 </button>
 
@@ -251,8 +251,9 @@ function searchTable() {
                             <input type="text" class="form-control" id="building_room" name="building_room">
 
                             <label for="image" class="form-label mt-2">Rasm</label>
-                            <input type="file" class="form-control" id="image" name="image">
-                            <img id="image-preview" src="" alt="Teacher Image" width="100" class="img-thumbnail mt-2">
+                            <input type="file" class="form-control" id="image" name="image_url">
+                            {{-- @dd(asset($teacher->image)) --}}
+                            <img id="image-preview2" src="{{ $teacher->image }}" alt="Teacher Image" width="100" class="img-thumbnail mt-2">
                         </div>
                     </div>
                 </div>
@@ -286,7 +287,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
 
             // Rasmni tahrirlash qismi
-            let imagePreview = document.querySelector('#image-preview');
+            let imagePreview = document.querySelector('#image-preview2');
             if (imagePreview) {
                 imagePreview.src = this.getAttribute('data-image') || '';
             }

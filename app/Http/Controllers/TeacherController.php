@@ -87,6 +87,7 @@ class TeacherController extends Controller
     // 📌 O‘qituvchini yangilash
     public function update(Request $request, Teacher $teacher)
     {
+        // dd($request->all());
         try {
             $request->validate([
                 'name' => 'required|string|max:255',
@@ -104,11 +105,11 @@ class TeacherController extends Controller
 
             // ✅ Eski rasmni o‘chirish va yangi rasm yuklash
             if ($request->hasFile('image_url')) {
-                if ($teacher->image_url) {
-                    Storage::disk('public')->delete($teacher->image_url);
+                if ($teacher->image) {
+                    Storage::disk('public')->delete($teacher->image);
                 }
                 $imagePath = $request->file('image_url')->store('teachers', 'public');
-                $teacher->image_url = $imagePath;
+                $teacher->image = '/storage' . '/' . $imagePath;
             }
 
             $teacher->save();

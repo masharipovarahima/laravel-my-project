@@ -10,7 +10,18 @@ class ProjectController extends Controller
     // Barcha loyihalarni chiqarish
     public function index()
     {
-        $projects = Project::all();
+        $query = Project::query();
+
+        if (request('search')) {
+            $search = request('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'LIKE', "%{$search}%")
+                    ->orWhere('about', 'LIKE', "%{$search}%")
+                    ->orWhere('result', 'LIKE', "%{$search}%");
+            });
+        }
+
+        $projects = $query->paginate(10);
         return view('projects.index', compact('projects'));
     }
 

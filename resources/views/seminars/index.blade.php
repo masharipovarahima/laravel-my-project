@@ -28,8 +28,8 @@
                 <tr>
                     <td>{{ $seminar->id }}</td>
                     <td>{{ $seminar->title }}</td>
-                    <td>{{ $seminar->formatted_start_time }}</td>
-                    <td>{{ $seminar->formatted_end_time ?? 'Nomalum' }}</td>
+                    <td>{{ $seminar->start_time }}</td>
+                    <td>{{ $seminar->end_time ?? 'Nomalum' }}</td>
                     <td>{{ $seminar->speaker }}</td>
                     <td>{{ $seminar->details ?? 'Izoh mavjud emas' }}</td>
                     <td>{{ $seminar->conference->name ?? 'Nomalum' }}</td>
@@ -70,12 +70,12 @@
 
                                     <div class="mb-3">
                                         <label for="start_time" class="form-label">Boshlanish Vaqti</label>
-                                        <input type="datetime-local" name="start_time" class="form-control" value="{{ $seminar->start_time->format('Y-m-d\TH:i') }}" required>
+                                        <input type="datetime-local" name="start_time" class="form-control" value="{{ $seminar->start_time }}" required>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="end_time" class="form-label">Tugash Vaqti</label>
-                                        <input type="datetime-local" name="end_time" class="form-control" value="{{ $seminar->end_time ? $seminar->end_time->format('Y-m-d\TH:i') : '' }}">
+                                        <input type="datetime-local" name="end_time" class="form-control" value="{{ $seminar->end_time }}">
                                     </div>
 
                                     <div class="mb-3">

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Seminar;
 use App\Models\Conference;
+use App\Models\Seminar;
 use Illuminate\Http\Request;
 
 class SeminarController extends Controller
@@ -12,7 +12,8 @@ class SeminarController extends Controller
     public function index()
     {
         $seminars = Seminar::with('conference')->paginate(10);
-        return view('seminars.index', compact('seminars'));
+        $conferences = Conference::all();
+        return view('seminars.index', compact('seminars', 'conferences'));
     }
 
     // Yangi seminar yaratish formasi

@@ -65,6 +65,40 @@ Route::put('/files/{id}', [FileController::class, 'update'])->name('files.update
 Route::delete('/files/{id}', [FileController::class, 'destroy'])->name('files.destroy');
 Route::get('/files/download/{subject_name}', [FileController::class, 'download'])->name('files.download');
 
+use App\Http\Controllers\NewsController;
+
+Route::resource('news', NewsController::class);
+
+
+use App\Http\Controllers\ConferenceController;
+use App\Http\Controllers\SeminarController;
+
+// Asosiy sahifa
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Konferensiyalar uchun marshrutlar
+Route::prefix('conferences')->name('conferences.')->group(function () {
+    Route::get('/', [ConferenceController::class, 'index'])->name('index'); // Barcha konferensiyalar ro'yxati
+    Route::get('/create', [ConferenceController::class, 'create'])->name('create'); // Yangi konferensiya yaratish
+    Route::post('/', [ConferenceController::class, 'store'])->name('store'); // Konferensiyani saqlash
+    Route::get('/{conference}', [ConferenceController::class, 'show'])->name('show'); // Konferensiya tafsilotlari
+    Route::get('/{conference}/edit', [ConferenceController::class, 'edit'])->name('edit'); // Konferensiyani tahrirlash
+    Route::put('/{conference}', [ConferenceController::class, 'update'])->name('update'); // Konferensiyani yangilash
+    Route::delete('/{conference}', [ConferenceController::class, 'destroy'])->name('destroy'); // Konferensiyani o'chirish
+});
+
+// Seminarlar uchun marshrutlar
+Route::prefix('seminars')->name('seminars.')->group(function () {
+    Route::get('/', [SeminarController::class, 'index'])->name('index'); // Barcha seminarlar ro'yxati
+    Route::get('/create', [SeminarController::class, 'create'])->name('create'); // Yangi seminar yaratish
+    Route::post('/', [SeminarController::class, 'store'])->name('store'); // Seminarni saqlash
+    Route::get('/{seminar}', [SeminarController::class, 'show'])->name('show'); // Seminar tafsilotlari
+    Route::get('/{seminar}/edit', [SeminarController::class, 'edit'])->name('edit'); // Seminarni tahrirlash
+    Route::put('/{seminar}', [SeminarController::class, 'update'])->name('update'); // Seminarni yangilash
+    Route::delete('/{seminar}', [SeminarController::class, 'destroy'])->name('destroy'); // Seminarni o'chirish
+});
 
 require __DIR__ . '/auth.php';
 

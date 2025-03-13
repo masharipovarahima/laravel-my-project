@@ -50,7 +50,7 @@ class TeacherController extends Controller
                 'phone' => 'required|string|max:20',
                 'email' => 'required|email|unique:teachers,email',
                 'address' => 'required|string|max:255',
-                'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'image_url' => 'nullable|image|max:2048',
             ]);
 
             $teacher = new Teacher();

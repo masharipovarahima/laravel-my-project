@@ -63,6 +63,20 @@
   <a class="nav-link" href="{{ url('/files') }}">Fayllar</a>
 </li>
 
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('news.index') }}">Yangiliklar</a>
+</li>
+
+
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('conferences.index') }}">Konferensiyalar</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('seminars.index') }}">Seminarlar</a>
+</li>
+
+
+
 </ul>
 
                     </ul>

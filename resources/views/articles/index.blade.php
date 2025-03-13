@@ -47,8 +47,8 @@
                                 <td>{{ $article->id }}</td>
                                 <td>{{ $article->name }}</td>
                                 <td>
-                                @if($article->file)
-                                  <a href="{{ asset('storage/' . $article->file) }}" download class="btn btn-primary btn-sm">
+                                @if($article->file_url)
+                                  <a href="{{ asset('storage/' . $article->file_url) }}" download class="btn btn-primary btn-sm">
                                    Ko‘chirib olish
                                           </a>
                                       @else

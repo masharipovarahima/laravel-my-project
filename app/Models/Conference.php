@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Builder;
 
 class Conference extends Model
 {
@@ -12,6 +13,12 @@ class Conference extends Model
 
     // Ruxsat etilgan maydonlar
     protected $fillable = ['name', 'start_date', 'end_date', 'location', 'description'];
+
+    // Sanalarni avtomatik ravishda `Carbon` obyektiga aylantirish
+    protected $casts = [
+        'start_date' => 'date',
+        'end_date' => 'date',
+    ];
 
     /**
      * Munosabat: Bir konferensiyada bir nechta seminar bo'ladi
@@ -24,9 +31,9 @@ class Conference extends Model
     /**
      * Konferensiyani qidirish bo'yicha so'rovni filtr qilish
      */
-    public function scopeSearch($query, $term)
+    public function scopeSearch(Builder $query, $term): Builder
     {
-        $term = "%" . $term . "%";
+        $term = "%{$term}%";
         return $query->where('name', 'like', $term)
                      ->orWhere('location', 'like', $term)
                      ->orWhere('description', 'like', $term);
@@ -35,16 +42,16 @@ class Conference extends Model
     /**
      * Boshlanish vaqti formatini olish
      */
-    public function getFormattedStartDateAttribute()
+    public function getFormattedStartDateAttribute(): ?string
     {
-        return $this->start_date ? $this->start_date->format('Y-m-d') : null;
+        return $this->start_date?->format('Y-m-d');
     }
 
     /**
      * Tugash vaqti formatini olish
      */
-    public function getFormattedEndDateAttribute()
+    public function getFormattedEndDateAttribute(): ?string
     {
-        return $this->end_date ? $this->end_date->format('Y-m-d') : null;
+        return $this->end_date?->format('Y-m-d');
     }
 }

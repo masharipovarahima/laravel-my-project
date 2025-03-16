@@ -1,0 +1,77 @@
+<?php
+
+// InformationController
+namespace App\Http\Controllers;
+
+use App\Models\Information;
+use Illuminate\Http\Request;
+
+class InformationController extends Controller
+{
+    // Ma'lumotlar ro'yxati
+    public function index()
+    {
+        $information = Information::all();
+        return view('information.index', compact('information'));
+    }
+
+    // Yangi ma'lumot yaratish
+    public function create()
+    {
+        return view('information.create');
+    }
+
+    // Ma'lumotni saqlash
+    public function store(Request $request)
+    {
+        $request->validate([
+            'directions_info' => 'nullable|string',
+            'position_title' => 'nullable|string|max:255',
+            'position_description' => 'nullable|string',
+            'address' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'email' => 'nullable|email|max:255',
+            'group_address' => 'nullable|string|max:255',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
+        ]);
+
+        Information::create($request->all());
+
+        return redirect()->route('information.index')->with('success', 'Malumot muvaffaqiyatli qoshildi!');
+    }
+
+    // Ma'lumotni tahrirlash
+    public function edit(Information $information)
+    {
+        return view('information.edit', compact('information'));
+    }
+
+    // Ma'lumotni yangilash
+    public function update(Request $request, Information $information)
+    {
+        $request->validate([
+            'directions_info' => 'nullable|string',
+            'position_title' => 'nullable|string|max:255',
+            'position_description' => 'nullable|string',
+            'address' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'email' => 'nullable|email|max:255',
+            'group_address' => 'nullable|string|max:255',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
+        ]);
+
+        $information->update($request->all());
+
+        return redirect()->route('information.index')->with('success', 'Malumot muvaffaqiyatli yangilandi!');
+    }
+
+    // Ma'lumotni o'chirish
+    public function destroy(Information $information)
+    {
+        $information->delete();
+
+        return redirect()->route('information.index')->with('success', 'Malumot muvaffaqiyatli ochirildi!');
+    }
+}

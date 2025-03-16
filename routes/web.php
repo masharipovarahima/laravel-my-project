@@ -100,6 +100,19 @@ Route::prefix('seminars')->name('seminars.')->group(function () {
     Route::delete('/{seminar}', [SeminarController::class, 'destroy'])->name('destroy'); // Seminarni o'chirish
 });
 
+use App\Http\Controllers\InformationController;
+
+Route::get('/information', [InformationController::class, 'index'])->name('information.index');
+Route::post('/information', [InformationController::class, 'store'])->name('information.store');
+Route::get('/information/{id}/edit', [InformationController::class, 'edit'])->name('information.edit');
+Route::put('/information/{id}', [InformationController::class, 'update'])->name('information.update');
+Route::delete('/information/{id}', [InformationController::class, 'destroy'])->name('information.destroy');
+
+// Asosiy sahifa uchun
+Route::get('/', function () {
+    return redirect()->route('information.index');
+});
+
 require __DIR__ . '/auth.php';
 
 use Illuminate\Support\Facades\Log;

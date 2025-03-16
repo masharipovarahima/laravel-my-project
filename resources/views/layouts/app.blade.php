@@ -75,6 +75,9 @@
     <a class="nav-link" href="{{ route('seminars.index') }}">Seminarlar</a>
 </li>
 
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('information.index') }}">Information</a>
+</li>
 
 
 </ul>

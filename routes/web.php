@@ -103,6 +103,7 @@ Route::prefix('seminars')->name('seminars.')->group(function () {
 use App\Http\Controllers\InformationController;
 
 Route::get('/information', [InformationController::class, 'index'])->name('information.index');
+Route::get('/information/create', [InformationController::class, 'create'])->name('information.create');
 Route::post('/information', [InformationController::class, 'store'])->name('information.store');
 Route::get('/information/{id}/edit', [InformationController::class, 'edit'])->name('information.edit');
 Route::put('/information/{id}', [InformationController::class, 'update'])->name('information.update');

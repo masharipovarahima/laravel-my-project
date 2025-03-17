@@ -18,7 +18,8 @@ class ConferenceController extends Controller
     // Yangi konferensiya yaratish formasi
     public function create()
     {
-        return view('conference.create');
+        $seminars = Seminar::all();
+        return view('conferences.create', compact('seminars'));
     }
 
     // Konferensiya va seminarlarni saqlash
@@ -60,7 +61,7 @@ class ConferenceController extends Controller
     public function edit(Conference $conference)
     {
         $conference->load('seminars');
-        return view('conference.edit', compact('conference'));
+        return view('conferences.edit', compact('conference'));
     }
 
     // Konferensiyani yangilash
@@ -91,7 +92,7 @@ class ConferenceController extends Controller
             }
         }
 
-        return redirect()->route('conference.index')->with('success', 'Konferensiya va seminarlar yangilandi!');
+        return redirect()->route('conferences.index')->with('success', 'Konferensiya va seminarlar yangilandi!');
     }
 
     // Konferensiyani o'chirish
@@ -99,6 +100,6 @@ class ConferenceController extends Controller
     {
         $conference->delete();
 
-        return redirect()->route('conference.index')->with('success', 'Konferensiya va bogliq seminarlar ochirildi!');
+        return redirect()->route('conferences.index')->with('success', 'Konferensiya va bogliq seminarlar ochirildi!');
     }
 }

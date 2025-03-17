@@ -7,12 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Information extends Model
 {
-    use HasFactory;
-
-    // Jadval nomini aniqlash (agar Laravel avtomatik aniqlay olmasa)
-    protected $table = 'informations';
-
-    // Mass-assignment (bir necha maydonni bir vaqtda to‘ldirish) uchun ruxsat berilgan ustunlar
     protected $fillable = [
         'directions_info',
         'position_title',

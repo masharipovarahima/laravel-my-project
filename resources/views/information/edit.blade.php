@@ -1,61 +1,122 @@
-<div id="editModal" class="modal" style="display: none;">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('editModal')">&times;</span>
-        <h2>Ma'lumotni Tahrirlash</h2>
+@extends('layouts.app')
 
-        <form id="editForm" action="" method="POST">
+@section('content')
+    <div class="container mt-4">
+        <h4 class="mb-4">Ma'lumotni Tahrirlash</h4>
+
+        <!-- Success Message -->
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <!-- Validation Errors -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <!-- Information Form -->
+        <form action="{{ route('information.update', $information->id) }}" method="POST">
             @csrf
             @method('PUT')
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="directions_info" class="form-label">Yo'nalish Ma'lumoti</label>
+                            <input type="text" name="directions_info" class="form-control"
+                                value="{{ old('directions_info', $information->directions_info) }}">
+                            @error('directions_info')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="position_title" class="form-label">Lavozim Nomi</label>
+                            <input type="text" name="position_title" class="form-control"
+                                value="{{ old('position_title', $information->position_title) }}">
+                            @error('position_title')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="position_description" class="form-label">Lavozim Tavsifi</label>
+                            <textarea name="position_description" class="form-control" rows="3">{{ old('position_description', $information->position_description) }}</textarea>
+                            @error('position_description')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="address" class="form-label">Manzil</label>
+                            <input type="text" name="address" class="form-control"
+                                value="{{ old('address', $information->address) }}">
+                            @error('address')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">Telefon</label>
+                            <input type="text" name="phone" class="form-control"
+                                value="{{ old('phone', $information->phone) }}">
+                            @error('phone')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control"
+                                value="{{ old('email', $information->email) }}">
+                            @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="group_address" class="form-label">Guruh Manzili</label>
+                            <input type="text" name="group_address" class="form-control"
+                                value="{{ old('group_address', $information->group_address) }}">
+                            @error('group_address')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="latitude" class="form-label">Kenglik (Latitude)</label>
+                            <input type="number" step="any" name="latitude" class="form-control"
+                                value="{{ old('latitude', $information->latitude) }}">
+                            @error('latitude')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="longitude" class="form-label">Uzunlik (Longitude)</label>
+                            <input type="number" step="any" name="longitude" class="form-control"
+                                value="{{ old('longitude', $information->longitude) }}">
+                            @error('longitude')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <input type="hidden" id="edit_id" name="id">
-
-            <label for="edit_directions_info">Directions Info:</label>
-            <input type="text" id="edit_directions_info" name="directions_info" required><br>
-
-            <label for="edit_position_title">Position Title:</label>
-            <input type="text" id="edit_position_title" name="position_title"><br>
-
-            <label for="edit_position_description">Position Description:</label>
-            <textarea id="edit_position_description" name="position_description"></textarea><br>
-
-            <label for="edit_address">Address:</label>
-            <input type="text" id="edit_address" name="address" required><br>
-
-            <label for="edit_phone">Phone:</label>
-            <input type="text" id="edit_phone" name="phone" required><br>
-
-            <label for="edit_email">Email:</label>
-            <input type="email" id="edit_email" name="email" required><br>
-
-            <label for="edit_group_address">Group Address:</label>
-            <input type="text" id="edit_group_address" name="group_address" required><br>
-
-            <label for="edit_latitude">Latitude:</label>
-            <input type="text" id="edit_latitude" name="latitude" required><br>
-
-            <label for="edit_longitude">Longitude:</label>
-            <input type="text" id="edit_longitude" name="longitude" required><br>
-
-            <button type="submit">Saqlash</button>
+            <!-- Form Submission Buttons -->
+            <div class="text-end">
+                <a href="{{ route('information.index') }}" class="btn btn-secondary">Bekor qilish</a>
+                <button type="submit" class="btn btn-primary">Saqlash</button>
+            </div>
         </form>
     </div>
-</div>
-
-<script>
-    function openEditModal(info) {
-        document.getElementById('edit_id').value = info.id;
-        document.getElementById('edit_directions_info').value = info.directions_info;
-        document.getElementById('edit_position_title').value = info.position_title || '';
-        document.getElementById('edit_position_description').value = info.position_description || '';
-        document.getElementById('edit_address').value = info.address;
-        document.getElementById('edit_phone').value = info.phone;
-        document.getElementById('edit_email').value = info.email;
-        document.getElementById('edit_group_address').value = info.group_address;
-        document.getElementById('edit_latitude').value = info.latitude;
-        document.getElementById('edit_longitude').value = info.longitude;
-
-        document.getElementById('editForm').action = '/information/' + info.id;
-
-        openModal('editModal');
-    }
-</script>
+@endsection

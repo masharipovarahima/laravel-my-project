@@ -6,9 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Information extends Model
 {
+    protected $table = 'information';
     protected $fillable = [
-        'title',
-        'description',
-        'image',
+        'directions_info',
+        'position_title',
+        'position_description',
+        'address',
+        'phone',
+        'email',
+        'group_address',
+        'latitude',
+        'longitude',
     ];
 }

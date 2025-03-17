@@ -11,8 +11,8 @@ class InformationController extends Controller
     // Ma'lumotlar ro'yxati
     public function index()
     {
-        $information = Information::all();
-        return view('information.index', compact('information'));
+        $informations = Information::all();
+        return view('information.index', compact('informations'));
     }
 
     // Yangi ma'lumot yaratish

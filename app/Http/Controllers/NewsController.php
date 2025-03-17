@@ -38,7 +38,7 @@ class NewsController extends Controller
         ]);
 
         // Rasmni saqlash
-        $imagePath = $request->file('image') ? $request->file('image')->store('news_images', 'public') : null;
+        $imagePath = $this->uploadPhoto($request->file('image'), 'news_images');
 
         // Yangilikni yaratish
         News::create([

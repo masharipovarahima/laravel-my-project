@@ -5,20 +5,22 @@
     <h2 class="mb-4">Ma'lumotlar Ro'yxati</h2>
     
     <!-- Yangi ma'lumot qo'shish tugmasi -->
-    <button class="btn btn-success mb-3" data-toggle="modal" data-target="#addModal">Yangi Ma'lumot Qo'shish</button>
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addInformationModal">
+        Yangi Ma'lumot Qo'shish
+    </button>
 
-    <table class="table table-bordered">
+    <table class="table table-bordered mt-3">
         <thead class="thead-dark">
             <tr>
                 <th>ID</th>
-                <th>Yo'nalish Bo'yicha Ma'lumot</th>
-                <th>Lavozim Nomi</th>
-                <th>Lavozim Tavsifi</th>
-                <th>Manzil</th>
-                <th>Telefon</th>
+                <th>Directions Info</th>
+                <th>Position Title</th>
+                <th>Position Description</th>
+                <th>Address</th>
+                <th>Phone</th>
                 <th>Email</th>
-                <th>Guruh Manzili</th>
-                <th>Joylashuv (Kenglik, Uzunlik)</th>
+                <th>Group Address</th>
+                <th>Location</th>
                 <th>Amallar</th>
             </tr>
         </thead>
@@ -36,7 +38,7 @@
                 <td>{{ $information->latitude }}, {{ $information->longitude }}</td>
                 <td>
                     <!-- Tahrirlash tugmasi -->
-                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal{{ $information->id }}">Tahrirlash</button>
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{ $information->id }}">Tahrirlash</button>
                     
                     <!-- O'chirish tugmasi -->
                     <form action="{{ route('information.destroy', $information->id) }}" method="POST" class="d-inline">
@@ -52,34 +54,36 @@
 </div>
 
 <!-- Qo'shish Modal Oynasi -->
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="addInformationModal" tabindex="-1" aria-labelledby="addInformationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Yangi Ma'lumot Qo'shish</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title" id="addInformationModalLabel">Yangi Ma'lumot Qo'shish</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Yopish">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form action="{{ route('information.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label>Yo'nalish Ma'lumoti:</label>
+                        <label>Directions Info:</label>
                         <input type="text" name="directions_info" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Lavozim Nomi:</label>
+                        <label>Position Title:</label>
                         <input type="text" name="position_title" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label>Lavozim Tavsifi:</label>
+                        <label>Position Description:</label>
                         <textarea name="position_description" class="form-control" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Manzil:</label>
+                        <label>Address:</label>
                         <input type="text" name="address" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Telefon:</label>
+                        <label>Phone:</label>
                         <input type="text" name="phone" class="form-control">
                     </div>
                     <div class="form-group">
@@ -87,18 +91,21 @@
                         <input type="email" name="email" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Guruh Manzili:</label>
+                        <label>Group Address:</label>
                         <input type="text" name="group_address" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Kenglik:</label>
+                        <label>Latitude:</label>
                         <input type="text" name="latitude" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Uzunlik:</label>
+                        <label>Longitude:</label>
                         <input type="text" name="longitude" class="form-control">
                     </div>
-                    <button type="submit" class="btn btn-success">Saqlash</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Saqlash</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+                    </div>
                 </form>
             </div>
         </div>

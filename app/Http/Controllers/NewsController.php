@@ -13,7 +13,7 @@ class NewsController extends Controller
     public function index()
     {
         // 'date' o'rniga 'published_at' dan foydalanamiz
-        $news = News::orderBy('published_at', 'desc')->get();
+        $news = News::orderBy('published_at', 'desc')->where('title', 'like', '%' . request('search') . '%')->get();
         return view('news.index', compact('news'));
     }
 
@@ -81,7 +81,8 @@ class NewsController extends Controller
 
         // Rasmni yangilash
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('news_images', 'public');
+            $this->deletePhoto($news->image);
+            $imagePath = $this->uploadPhoto($request->file('image'), 'news_images');
             $news->image = $imagePath;
         }
 
@@ -100,6 +101,8 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
+        // Rasmni o'chirish
+        $this->deletePhoto($news->image);
         $news->delete();
 
         return redirect()->route('news.index')->with('success', 'Yangilik o\'chirildi!');

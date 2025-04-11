@@ -29,33 +29,6 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="directions_info" class="form-label">Yo'nalish Ma'lumoti</label>
-                            <input type="text" name="directions_info" class="form-control"
-                                value="{{ old('directions_info') }}">
-                            @error('directions_info')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="position_title" class="form-label">Lavozim Nomi</label>
-                            <input type="text" name="position_title" class="form-control"
-                                value="{{ old('position_title') }}">
-                            @error('position_title')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 mb-3">
-                            <label for="position_description" class="form-label">Lavozim Tavsifi</label>
-                            <textarea name="position_description" class="form-control" rows="3">{{ old('position_description') }}</textarea>
-                            @error('position_description')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
                             <label for="address" class="form-label">Manzil</label>
                             <input type="text" name="address" class="form-control" value="{{ old('address') }}">
                             @error('address')
@@ -78,33 +51,15 @@
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="group_address" class="form-label">Guruh Manzili</label>
-                            <input type="text" name="group_address" class="form-control"
-                                value="{{ old('group_address') }}">
-                            @error('group_address')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="latitude" class="form-label">Kenglik (Latitude)</label>
-                            <input type="number" step="any" name="latitude" class="form-control"
-                                value="{{ old('latitude') }}">
-                            @error('latitude')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="longitude" class="form-label">Uzunlik (Longitude)</label>
-                            <input type="number" step="any" name="longitude" class="form-control"
-                                value="{{ old('longitude') }}">
-                            @error('longitude')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
+                </div>
+            </div>
+
+            <!-- University Location Map -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="mb-3">Universitet joylashuvi</h5>
+                    <div id="map" style="height: 400px;"></div>
                 </div>
             </div>
 
@@ -115,4 +70,19 @@
             </div>
         </form>
     </div>
+
+    <script>
+        function initMap() {
+            var universityLocation = { lat: 48.214, lng: 11.652 }; // Universitet koordinatalarini o'zgartiring
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: universityLocation
+            });
+            var marker = new google.maps.Marker({
+                position: universityLocation,
+                map: map
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"></script>
 @endsection

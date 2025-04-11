@@ -13,7 +13,7 @@ class News extends Model
         'title',
         'content',
         'image',
-        'published_at'
+        'published_at',
     ];
 
     protected $dates = ['published_at'];

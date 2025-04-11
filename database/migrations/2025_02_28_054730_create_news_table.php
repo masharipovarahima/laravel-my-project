@@ -12,11 +12,13 @@ return new class extends Migration {
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
+
             $table->string('title'); // Yangilik sarlavhasi
-           
             $table->text('content'); // Yangilik matni
-            $table->string('image')->nullable(); // Rasm manzili (ixtiyoriy)
-            $table->timestamp('published_at')->nullable(); // Nashr qilingan vaqt (ixtiyoriy)
+
+            $table->string('image')->nullable(); // Rasm fayl yo'li (nullable)
+            $table->timestamp('published_at')->nullable(); // Nashr qilingan vaqti (nullable)
+
             $table->timestamps(); // created_at va updated_at
         });
     }

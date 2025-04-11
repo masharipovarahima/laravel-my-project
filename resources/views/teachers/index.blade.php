@@ -141,45 +141,47 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="name" class="form-label">Ism</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
-
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Ism" required>
+                            
                                 <label for="surname" class="form-label mt-2">Familiya</label>
-                                <input type="text" class="form-control" id="surname" name="surname" required>
-
+                                <input type="text" class="form-control" id="surname" name="surname" placeholder="Familiya" required>
+                            
                                 <label for="birthday" class="form-label mt-2">Tug'ilgan sana</label>
-                                <input type="date" class="form-control" id="birthday" name="birthday" required>
-
+                                <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Tug'ilgan sana" required>
+                            
                                 <label for="specialist" class="form-label mt-2">Mutaxassislik</label>
-                                <input type="text" class="form-control" id="specialist" name="specialist" required>
-
+                                <input type="text" class="form-control" id="specialist" name="specialist" placeholder="Mutaxassislikni kiriting" required>
+                            
                                 <label for="diplom_number" class="form-label mt-2">Diplom raqami</label>
-                                <input type="text" class="form-control" id="diplom_number" name="diplom_number" required>
-
+                                <input type="text" class="form-control" id="diplom_number" name="diplom_number" placeholder="Diplom raqami" required>
+                            
                                 <label for="phone" class="form-label mt-2">Telefon</label>
-                                <input type="text" class="form-control" id="phone" name="phone" required>
-
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="Telefon" required>
+                            
                                 <label for="email" class="form-label mt-2">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
                             </div>
-
+                            
                             <div class="col-md-6">
                                 <label for="address" class="form-label">Manzil</label>
-                                <input type="text" class="form-control" id="address" name="address" required>
-
+                                <textarea class="form-control ckeditor" id="address" name="address" placeholder="Manzil" required></textarea>
+                            
                                 <label for="telegram" class="form-label mt-2">Telegram</label>
-                                <input type="text" class="form-control" id="telegram" name="telegram">
-
+                                <textarea class="form-control ckeditor" id="telegram" name="telegram" placeholder="Telegram"></textarea>
+                            
                                 <label for="instagram" class="form-label mt-2">Instagram</label>
-                                <input type="text" class="form-control" id="instagram" name="instagram">
-
+                                <textarea class="form-control ckeditor" id="instagram" name="instagram" placeholder="Instagram"></textarea>
+                            
                                 <label for="about" class="form-label mt-2">Haqida</label>
-                                <textarea class="form-control" id="about" name="about" rows="2"></textarea>
-
+                                <textarea class="form-control ckeditor" id="about" name="about" placeholder="Haqida" required></textarea>
+                            
                                 <label for="building_room" class="form-label mt-2">Xona</label>
-                                <input type="text" class="form-control" id="building_room" name="building_room">
-
+                                <input type="text" class="form-control" id="building_room" name="building_room" placeholder="Xona">
+                            
                                 <label for="image" class="form-label mt-2">Rasm</label>
-                                <input type="file" class="form-control" id="image" name="image_url">
+                                <input type="file" class="form-control" id="image" name="image">
+                            </div>
+                            
                             </div>
                         </div>
                     </div>
@@ -210,44 +212,46 @@
                             <div class="col-md-6">
                                 <label for="name" class="form-label">Ism</label>
                                 <input type="text" class="form-control" id="name" name="name" required>
-
+                            
                                 <label for="surname" class="form-label mt-2">Familiya</label>
                                 <input type="text" class="form-control" id="surname" name="surname" required>
-
+                            
                                 <label for="birthday" class="form-label mt-2">Tug'ilgan sana</label>
                                 <input type="date" class="form-control" id="birthday" name="birthday" required>
-
+                            
                                 <label for="specialist" class="form-label mt-2">Mutaxassislik</label>
                                 <input type="text" class="form-control" id="specialist" name="specialist" required>
-
+                            
                                 <label for="diplom_number" class="form-label mt-2">Diplom raqami</label>
                                 <input type="text" class="form-control" id="diplom_number" name="diplom_number" required>
-
+                            
                                 <label for="phone" class="form-label mt-2">Telefon</label>
                                 <input type="text" class="form-control" id="phone" name="phone" required>
-
+                            
                                 <label for="email" class="form-label mt-2">Email</label>
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
-
+                            
                             <div class="col-md-6">
                                 <label for="address" class="form-label">Manzil</label>
-                                <input type="text" class="form-control" id="address" name="address" required>
-
+                                <textarea class="form-control ckeditor" id="address" name="address" rows="2"></textarea>
+                            
                                 <label for="telegram" class="form-label mt-2">Telegram</label>
                                 <input type="text" class="form-control" id="telegram" name="telegram">
-
+                            
                                 <label for="instagram" class="form-label mt-2">Instagram</label>
                                 <input type="text" class="form-control" id="instagram" name="instagram">
-
+                            
                                 <label for="about" class="form-label mt-2">Haqida</label>
-                                <textarea class="form-control" id="about" name="about" rows="2"></textarea>
-
+                                <textarea class="form-control ckeditor" id="about" name="about" rows="3"></textarea>
+                            
                                 <label for="building_room" class="form-label mt-2">Xona</label>
-                                <input type="text" class="form-control" id="building_room" name="building_room">
-
+                                <textarea class="form-control ckeditor" id="building_room" name="building_room" rows="1"></textarea>
+                            
                                 <label for="image" class="form-label mt-2">Rasm</label>
                                 <input type="file" class="form-control" id="image" name="image_url">
+                            </div>
+                            
                                 {{-- @dd(asset($teacher->image)) --}}
                                 @if (!empty($teacher))
                                     <img id="image-preview2" src="{{ asset($teacher->image) }}" alt="Teacher Image" width="100"
@@ -268,35 +272,55 @@
     </div>
 
     <script>
-
         document.addEventListener("DOMContentLoaded", function () {
             let editModal = document.getElementById('editTeacherModal');
             let editForm = document.getElementById('editTeacherForm');
-
+    
             document.querySelectorAll('.edit-btn').forEach(button => {
-                button.addEventListener('click', function () {
-                    let teacherId = this.getAttribute('data-id');
-                    editForm.action = "/teachers/" + teacherId;
+    button.addEventListener('click', function () {
+        let teacherId = this.getAttribute('data-id');
+        editForm.action = "/teachers/" + teacherId;
 
-                    // Formani ma'lumotlar bilan to'ldirish
-                    ['name', 'surname', 'birthday', 'specialist', 'diplom_number', 'phone', 'email', 'address', 'telegram', 'instagram', 'about', 'building_room'].forEach(field => {
-                        let inputField = editForm.querySelector(`#${field}`);
-                        if (inputField) {
-                            inputField.value = this.getAttribute(`data-${field}`) || '';
-                        }
-                    });
+        const form = document.getElementById('editTeacherForm');
+        form.querySelector('#name').value = this.getAttribute('data-name');
+        form.querySelector('#surname').value = this.getAttribute('data-surname');
+        form.querySelector('#birthday').value = this.getAttribute('data-birthday');
+        form.querySelector('#specialist').value = this.getAttribute('data-specialist');
+        form.querySelector('#diplom_number').value = this.getAttribute('data-diplom_number');
+        form.querySelector('#phone').value = this.getAttribute('data-phone');
+        form.querySelector('#email').value = this.getAttribute('data-email');
 
-                    // Rasmni tahrirlash qismi
-                    let imagePreview = document.querySelector('#image-preview2');
-                    if (imagePreview) {
-                        imagePreview.src = this.getAttribute('data-image') || '';
-                    }
-                });
-            });
+        const address = this.getAttribute('data-address') || '';
+        const telegram = this.getAttribute('data-telegram') || '';
+        const instagram = this.getAttribute('data-instagram') || '';
+        const about = this.getAttribute('data-about') || '';
+        const buildingRoom = this.getAttribute('data-building_room') || '';
+
+        // CKEditor instance'larini yangilash
+        if (CKEDITOR.instances['address']) CKEDITOR.instances['address'].setData(address);
+        if (CKEDITOR.instances['telegram']) CKEDITOR.instances['telegram'].setData(telegram);
+        if (CKEDITOR.instances['instagram']) CKEDITOR.instances['instagram'].setData(instagram);
+        if (CKEDITOR.instances['about']) CKEDITOR.instances['about'].setData(about);
+        if (CKEDITOR.instances['building_room']) CKEDITOR.instances['building_room'].setData(buildingRoom);
+
+        // Rasmni yangilash (agar mavjud bo‘lsa)
+        const imageUrl = this.getAttribute('data-image');
+        const imgPreview = document.getElementById('image-preview2');
+        if (imageUrl && imgPreview) {
+            imgPreview.src = imageUrl;
+            imgPreview.style.display = 'block';
+        } else if (imgPreview) {
+            imgPreview.style.display = 'none';
+        }
+    });
+});
+
         });
-
-
+    
     </script>
 
 
+    
+
+@vite(['resources/js/app.js'])
 @endsection

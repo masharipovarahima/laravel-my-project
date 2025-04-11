@@ -91,7 +91,8 @@
                     <!-- Tavsif -->
                     <div class="mb-3">
                         <label for="create_description" class="form-label">Tavsif</label>
-                        <textarea class="form-control" id="create_description" name="description" rows="3" placeholder="Lavozim haqida qisqacha ma'lumot"></textarea>
+                        
+                        <textarea class="form-control ckeditor" id="create_description" name="description" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -123,7 +124,7 @@
                     <!-- Tavsif -->
                     <div class="mb-3">
                         <label for="edit_description" class="form-label">Tavsif</label>
-                        <textarea class="form-control" id="edit_description" name="description" rows="3"></textarea>
+                        <textarea class="form-control ckeditor" id="edit_description" name="description" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -153,4 +154,5 @@
         document.getElementById('edit_description').value = description;
     });
 </script>
+@vite(['resources/js/app.js'])
 @endsection

@@ -17,6 +17,15 @@
                     @csrf
                     @method('PUT')
                     <div class="modal-body">
+                        <!-- Tavsif (CKEditor bilan) -->
+<div class="mb-3">
+    <label for="description" class="form-label">Tavsif</label>
+    <textarea class="form-control @error('description') is-invalid @enderror" id="editor" name="description">
+        {{ old('description', $teacher->description) }}
+    </textarea>
+    @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror
+</div>
+
                         <!-- Ism -->
                         <div class="mb-3">
                             <label for="name" class="form-label">Ism</label>
@@ -84,6 +93,28 @@
         </div>
     </div>
 </div>
+<!-- CKEditor skriptini ulash -->
+<script src="{{ asset('ckeditor5/ckeditor.js') }}"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // CKEditor ni "Tavsif" maydoniga o‘rnatish
+        ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+                console.error('CKEditor yuklashda xatolik:', error);
+            });
+
+        // Modal oynani avtomatik ochish
+        var editModalEl = document.getElementById('editTeacherModal');
+        if (editModalEl) {
+            var editModal = new bootstrap.Modal(editModalEl);
+            editModal.show();
+        }
+    });
+</script>
+
+
 <!-- Hozirgi rasmni ko'rsatish -->
 @if($teacher->image_url)
     <div class="mb-3">

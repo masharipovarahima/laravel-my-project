@@ -106,7 +106,7 @@
                     <!-- Mutaxassislik -->
                     <div class="mb-3">
                         <label for="specialist" class="form-label">Mutaxassislik</label>
-                        <input type="text" class="form-control" id="specialist" name="specialist" placeholder="Mutaxassislikni kiriting" required>
+                        <textarea class="form-control ckeditor" id="specialist" name="specialist" placeholder="Mutaxassislikni kiriting" required></textarea>
                     </div>
                     <!-- O'qituvchi ID -->
                     <div class="mb-3">
@@ -143,7 +143,7 @@
                     <!-- Mutaxassislik -->
                     <div class="mb-3">
                         <label for="edit_specialist" class="form-label">Mutaxassislik</label>
-                        <input type="text" class="form-control" id="edit_specialist" name="specialist" placeholder="Mutaxassislikni kiriting" required>
+                        <textarea class="form-control ckeditor" id="edit_specialist" name="specialist" required></textarea>
                     </div>
                     <!-- O'qituvchi ID -->
                     <div class="mb-3">
@@ -180,4 +180,6 @@
         document.getElementById('edit_teacher_id').value = subjectTeacherId;
     });
 </script>
+@vite(['resources/js/app.js'])
+
 @endsection

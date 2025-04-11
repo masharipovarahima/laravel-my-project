@@ -3,17 +3,13 @@
 @section('content')
     <div class="container">
         <h2>{{ $teacher->name }} {{ $teacher->surname }}</h2>
-        @if($teacher->image_url)
-    {{-- Rasm manzilini tekshirish --}}
-    <p>Rasm manzili: {{ asset('storage/' . $teacher->image_url) }}</p>
-    
-    @if ($teacher->image_url)
-    <img src="{{ asset('storage/' . $teacher->image_url) }}" alt="O‘qituvchi rasmi" class="img-thumbnail" width="100">
-@else
-    <span class="text-muted">Rasm yo'q</span>
-@endif
 
-
+        @if ($teacher->image_url)
+            <p>Rasm manzili: {{ asset('storage/' . $teacher->image_url) }}</p>
+            <img src="{{ asset('storage/' . $teacher->image_url) }}" alt="O‘qituvchi rasmi" class="img-thumbnail" width="100">
+        @else
+            <span class="text-muted">Rasm yo'q</span>
+        @endif
 
         <p><strong>Tug‘ilgan sana:</strong> {{ $teacher->birthday }}</p>
         <p><strong>Mutaxassisligi:</strong> {{ $teacher->specialist }}</p>

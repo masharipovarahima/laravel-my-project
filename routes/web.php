@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NewsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -65,7 +66,7 @@ Route::put('/files/{id}', [FileController::class, 'update'])->name('files.update
 Route::delete('/files/{id}', [FileController::class, 'destroy'])->name('files.destroy');
 Route::get('/files/download/{subject_name}', [FileController::class, 'download'])->name('files.download');
 
-use App\Http\Controllers\NewsController;
+
 
 Route::resource('news', NewsController::class);
 

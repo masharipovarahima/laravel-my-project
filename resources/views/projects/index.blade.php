@@ -107,31 +107,37 @@
                         <label for="create_name" class="form-label">Proekt nomi</label>
                         <input type="text" class="form-control" id="create_name" name="name" placeholder="Proekt nomi" required>
                     </div>
+                    
                     <!-- Boshlanish vaqti -->
                     <div class="mb-3">
                         <label for="create_begin_time" class="form-label">Boshlanish vaqti</label>
                         <input type="date" class="form-control" id="create_begin_time" name="begin_time" required>
                     </div>
+                    
                     <!-- Tugash vaqti -->
                     <div class="mb-3">
                         <label for="create_end_time" class="form-label">Tugash vaqti</label>
                         <input type="date" class="form-control" id="create_end_time" name="end_time" required>
                     </div>
+                    
                     <!-- Rasm yuklash -->
                     <div class="mb-3">
                         <label for="create_image_url" class="form-label">Rasm</label>
                         <input type="file" class="form-control" id="create_image_url" name="image_url">
                     </div>
+                    
                     <!-- Proekt haqida -->
                     <div class="mb-3">
                         <label for="create_about" class="form-label">Haqida</label>
-                        <textarea class="form-control" id="create_about" name="about" rows="3" placeholder="Proekt haqida ma'lumot"></textarea>
+                        <textarea class="form-control ckeditor" id="create_about" name="about" placeholder="Proekt haqida ma'lumot"></textarea>
                     </div>
+                    
                     <!-- Natija -->
                     <div class="mb-3">
                         <label for="create_result" class="form-label">Natija</label>
-                        <textarea class="form-control" id="create_result" name="result" rows="3" placeholder="Proekt natijasi"></textarea>
+                        <textarea class="form-control ckeditor" id="create_result" name="result" placeholder="Proekt natijasi"></textarea>
                     </div>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
@@ -153,38 +159,45 @@
             <form id="editProjectForm" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class="modal-body">
+                <<div class="modal-body">
                     <!-- Proekt nomi -->
                     <div class="mb-3">
                         <label for="edit_name" class="form-label">Proekt nomi</label>
                         <input type="text" class="form-control" id="edit_name" name="name" required>
                     </div>
+                
                     <!-- Boshlanish vaqti -->
                     <div class="mb-3">
                         <label for="edit_begin_time" class="form-label">Boshlanish vaqti</label>
                         <input type="date" class="form-control" id="edit_begin_time" name="begin_time" required>
                     </div>
+                
                     <!-- Tugash vaqti -->
                     <div class="mb-3">
                         <label for="edit_end_time" class="form-label">Tugash vaqti</label>
                         <input type="date" class="form-control" id="edit_end_time" name="end_time" required>
                     </div>
+                
                     <!-- Rasm yuklash -->
                     <div class="mb-3">
                         <label for="edit_image_url" class="form-label">Rasm</label>
                         <input type="file" class="form-control" id="edit_image_url" name="image_url">
                         <small id="currentImageHelp" class="form-text text-muted"></small>
                     </div>
+                
                     <!-- Proekt haqida -->
                     <div class="mb-3">
                         <label for="edit_about" class="form-label">Haqida</label>
-                        <textarea class="form-control" id="edit_about" name="about" rows="3"></textarea>
+                        <textarea class="form-control ckeditor" id="edit_about" name="about" placeholder="Proekt haqida ma'lumot"></textarea>
                     </div>
+                
                     <!-- Natija -->
                     <div class="mb-3">
                         <label for="edit_result" class="form-label">Natija</label>
-                        <textarea class="form-control" id="edit_result" name="result" rows="3"></textarea>
+                        <textarea class="form-control ckeditor" id="edit_result" name="result" placeholder="Proekt natijasi"></textarea>
                     </div>
+                </div>
+                
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
@@ -224,4 +237,25 @@
        
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.ckeditor').forEach(el => {
+            ClassicEditor.create(el).catch(error => {
+                console.error(error);
+            });
+        });
+    });
+
+    // Modal ochilganda CKEditor qayta ishga tushishi kerak bo‘lsa:
+    document.addEventListener('shown.bs.modal', function () {
+        document.querySelectorAll('.ckeditor').forEach(el => {
+            if (!el.classList.contains('ck-editor__editable')) {
+                ClassicEditor.create(el).catch(error => {
+                    console.error(error);
+                });
+            }
+        });
+    });
+</script>
+@vite(['resources/js/app.js'])
 @endsection

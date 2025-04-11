@@ -11,7 +11,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('files', function (Blueprint $table) {
-            $table->foreignId('subject_id')->constrained()->onDelete('cascade'); // Faylga fanning ID si qo'shildi
+            if (!Schema::hasColumn('files', 'subject_id')) {
+                $table->foreignId('subject_id')->constrained()->onDelete('cascade'); 
+            }
         });
     }
 
@@ -21,7 +23,11 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('files', function (Blueprint $table) {
-            $table->dropForeign(['subject_id']);
+            if (Schema::hasColumn('files', 'subject_id')) {
+                $table->dropForeign(['subject_id']);
+                $table->dropColumn('subject_id');
+            }
         });
     }
+    
 };

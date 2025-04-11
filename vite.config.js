@@ -7,6 +7,7 @@ export default defineConfig({
             input: [
                 'resources/app.scss',
                 'resources/js/app.js',
+                'resources/js/ckeditor.js' ,
             ],
             refresh: true,
         }),

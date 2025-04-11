@@ -67,26 +67,27 @@
                                         <label for="title" class="form-label">Seminar Nomi</label>
                                         <input type="text" name="title" class="form-control" value="{{ $seminar->title }}" required>
                                     </div>
-
+                                    
                                     <div class="mb-3">
                                         <label for="start_time" class="form-label">Boshlanish Vaqti</label>
                                         <input type="datetime-local" name="start_time" class="form-control" value="{{ $seminar->start_time }}" required>
                                     </div>
-
+                                    
                                     <div class="mb-3">
                                         <label for="end_time" class="form-label">Tugash Vaqti</label>
                                         <input type="datetime-local" name="end_time" class="form-control" value="{{ $seminar->end_time }}">
                                     </div>
-
+                                    
                                     <div class="mb-3">
                                         <label for="speaker" class="form-label">Ma'ruzachi</label>
                                         <input type="text" name="speaker" class="form-control" value="{{ $seminar->speaker }}" required>
                                     </div>
-
+                                    
                                     <div class="mb-3">
                                         <label for="details" class="form-label">Batafsil</label>
-                                        <textarea name="details" class="form-control">{{ $seminar->details }}</textarea>
+                                        <textarea name="details" class="form-control ckeditor">{{ $seminar->details }}</textarea>
                                     </div>
+                                    
 
                                     <div class="mb-3">
                                         <label for="conference_id" class="form-label">Konferensiya</label>
@@ -125,27 +126,27 @@
                             <label for="title" class="form-label">Seminar Nomi</label>
                             <input type="text" name="title" class="form-control" required>
                         </div>
-
+                        
                         <div class="mb-3">
                             <label for="start_time" class="form-label">Boshlanish Vaqti</label>
                             <input type="datetime-local" name="start_time" class="form-control" required>
                         </div>
-
+                        
                         <div class="mb-3">
                             <label for="end_time" class="form-label">Tugash Vaqti</label>
                             <input type="datetime-local" name="end_time" class="form-control">
                         </div>
-
+                        
                         <div class="mb-3">
                             <label for="speaker" class="form-label">Ma'ruzachi</label>
                             <input type="text" name="speaker" class="form-control" required>
                         </div>
-
+                        
                         <div class="mb-3">
                             <label for="details" class="form-label">Batafsil</label>
-                            <textarea name="details" class="form-control"></textarea>
+                            <textarea name="details" class="form-control ckeditor"></textarea>
                         </div>
-
+                        
                         <div class="mb-3">
                             <label for="conference_id" class="form-label">Konferensiya</label>
                             <select name="conference_id" class="form-control" required>
@@ -162,4 +163,15 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+<script>
+    document.querySelectorAll('.ckeditor').forEach(el => {
+        ClassicEditor.create(el).catch(error => {
+            console.error(error);
+        });
+    });
+</script>
+
+
+@vite(['resources/js/app.js'])
 @endsection

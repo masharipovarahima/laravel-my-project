@@ -58,28 +58,28 @@
                                             <div class="modal-body">
                                                 <div class="mb-3">
                                                     <label for="name" class="form-label">Nomi</label>
-                                                    <input type="text" name="name" class="form-control"
-                                                        value="{{ $conference->name }}" required>
+                                                    <input type="text" name="name" class="form-control" value="{{ $conference->name }}" required>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="start_date" class="form-label">Boshlanish sanasi</label>
-                                                    <input type="date" name="start_date" class="form-control"
-                                                        value="{{ $conference->start_date }}" required>
+                                                    <input type="date" name="start_date" class="form-control" value="{{ $conference->start_date }}" required>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="end_date" class="form-label">Tugash sanasi</label>
-                                                    <input type="date" name="end_date" class="form-control"
-                                                        value="{{ $conference->end_date }}">
+                                                    <input type="date" name="end_date" class="form-control" value="{{ $conference->end_date }}">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="location" class="form-label">Joylashuv</label>
-                                                    <input type="text" name="location" class="form-control"
-                                                        value="{{ $conference->location }}" required>
+                                                    <input type="text" name="location" class="form-control" value="{{ $conference->location }}" required>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="description" class="form-label">Tavsif</label>
-                                                    <textarea name="description" class="form-control">{{ $conference->description }}</textarea>
+                                                    <textarea name="description" id="edit_description_editor" class="form-control">{{ $conference->description }}</textarea>
                                                 </div>
+                                                
+                                                
+                                                
+                                                
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -157,8 +157,19 @@
                             </div>
                             <div class="mb-3">
                                 <label for="description" class="form-label">Tavsif</label>
-                                <textarea name="description" class="form-control"></textarea>
+                                <textarea name="description" id="description_editor" class="form-control"></textarea>
                             </div>
+                            
+                            
+                            <!-- CKEditor uchun script -->
+                            <script>
+                                ClassicEditor
+                                    .create(document.querySelector('#description_editor'))
+                                    .catch(error => {
+                                        console.error(error);
+                                    });
+                            </script>
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-success">Saqlash</button>
@@ -168,4 +179,18 @@
             </div>
         </div>
     </div>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#edit_content'))
+            .catch(error => {
+                console.error(error);
+            });
+    
+        ClassicEditor
+            .create(document.querySelector('#description_editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    @vite(['resources/js/app.js'])
 @endsection

@@ -1,77 +1,89 @@
 <?php
 
-// InformationController
 namespace App\Http\Controllers;
 
-use App\Models\Information;
 use Illuminate\Http\Request;
+use App\Models\Information;
 
 class InformationController extends Controller
 {
-    // Ma'lumotlar ro'yxati
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $informations = Information::all();
+        $informations = Information::all(); // Barcha ma'lumotlarni olish
         return view('information.index', compact('informations'));
     }
 
-    // Yangi ma'lumot yaratish
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        return view('information.create');
+        return view('information.create'); // 'create.blade.php' ni qaytarish
     }
 
-    // Ma'lumotni saqlash
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $request->validate([
-            'directions_info' => 'nullable|string',
-            'position_title' => 'nullable|string|max:255',
-            'position_description' => 'nullable|string',
-            'address' => 'nullable|string|max:255',
-            'phone' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
-            'group_address' => 'nullable|string|max:255',
+        // Ma'lumotlarni validatsiya qilish
+        $validated = $request->validate([
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
             'latitude' => 'nullable|numeric',
             'longitude' => 'nullable|numeric',
         ]);
 
-        Information::create($request->all());
+        // Ma'lumotni yaratish
+        Information::create($validated);
 
-        return redirect()->route('information.index')->with('success', 'Malumot muvaffaqiyatli qoshildi!');
+        return redirect()->route('information.index')->with('success', 'Malumot muvaffaqiyatli qoshildi.');
     }
 
-    // Ma'lumotni tahrirlash
-    public function edit($id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(Information $information)
     {
-        $information = Information::findOrFail($id);
+        return view('information.show', compact('information'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Information $information)
+    {
         return view('information.edit', compact('information'));
     }
 
-    // Ma'lumotni yangilash
-    public function update(Request $request, $id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Information $information)
     {
-        $information = Information::findOrFail($id);
-        $request->validate([
-            'directions_info' => 'nullable|string',
-            'position_title' => 'nullable|string|max:255',
-            'position_description' => 'nullable|string',
-            'address' => 'nullable|string|max:255',
-            'phone' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:255',
-            'group_address' => 'nullable|string|max:255',
-            'latitude' => 'nullable|numeric|between:-90,90', // Restrict latitude to -90 to 90
-            'longitude' => 'nullable|numeric|between:-180,180', // Restrict longitude to -180 to 180
+        $validated = $request->validate([
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|email|max:255',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
         ]);
 
-        $information->update($request->all());
+        // Ma'lumotni yangilash
+        $information->update($validated);
 
         return redirect()->route('information.index')->with('success', 'Malumot muvaffaqiyatli yangilandi!');
     }
-    // Ma'lumotni o'chirish
-    public function destroy($id)
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Information $information)
     {
-        $information = Information::findOrFail($id);
         $information->delete();
 
         return redirect()->route('information.index')->with('success', 'Malumot muvaffaqiyatli ochirildi!');

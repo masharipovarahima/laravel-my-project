@@ -10,9 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('information', function (Blueprint $table) {
-            $table->decimal('latitude', 10, 6)->nullable()->change();
-            $table->decimal('longitude', 10, 6)->nullable()->change();
+        Schema::create('information', function (Blueprint $table) {
+            $table->id();
+            $table->string('address');
+            $table->string('phone')->nullable(); // Telefon raqamini nullable qilish
+            $table->string('email')->unique(); // Email unikal bo‘lishi kerak
+            $table->decimal('latitude', 10, 7)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,9 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('information', function (Blueprint $table) {
-            $table->dropColumn('latitude');
-            $table->dropColumn('longitude');
-        });
+        Schema::dropIfExists('information');
     }
 };
